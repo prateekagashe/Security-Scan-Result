@@ -24,8 +24,7 @@ var ScanContoller = {
             finishedAt,
         } = req.body;
 
-        if (!status || !repositoryName || !findings || !queuedAt || !scanningAt || !finishedAt
-        ) {
+        if (!status || !repositoryName || !findings) {
             res.status(Constants.BAD_REQUEST_ERROR_CODE);
             res.send(Constants.MISSING_FIELDS_ERROR);
             return;
@@ -82,6 +81,24 @@ var ScanContoller = {
             console.log(error);
         }
     },
+    deleteScanResult: async function(req, res){
+        let { scanId } = req.query;
+        if (!scanId) {
+            res.status(Constants.BAD_REQUEST_ERROR_CODE);
+            res.send(Constants.MISSING_FIELDS_ERROR);
+            return;
+        }
+        try{
+            let response = await ScanResults.remove({scanId: scanId})
+            if (response) {
+                res.status(constants.HTTP_SUCCESS_CODE);
+                res.json(response);
+                return;
+            }
+        } catch(err){
+            console.log(err)
+        }
+    }
 };
 
 module.exports = ScanContoller;

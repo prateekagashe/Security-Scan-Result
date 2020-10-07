@@ -4,8 +4,8 @@ var ScanResults = require('../controllers/scan-controller')
 
 
 router.post(
-  "/addNewScanResult",
-  ScanResults.addNewScanResult
+    "/addNewScanResult",
+    ScanResults.addNewScanResult
 );
 
 router.get(
@@ -16,5 +16,10 @@ router.get(
     "/fetchAllScanResult",
     ScanResults.fetchAllScanResult
 )
+router.delete(
+    "/deleteScanResult",
+    ScanResults.deleteScanResult
+)
+
 
 module.exports = router;
