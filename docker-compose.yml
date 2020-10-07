@@ -1,0 +1,47 @@
+# version: "3"
+# services:
+#     backend:
+#         container_name: security-scan-node
+#         build:
+#             context: ./api
+#             dockerfile: Dockerfile
+#         image: node/security-scan-node
+#         ports:
+#             - "5000:5000"
+       
+#     frontend:
+#         container_name: security-scan-react
+#         build:
+#             context: ./dashboard
+#             dockerfile: Dockerfile
+#         image: react/security-scan-react
+#         ports:
+#             - "3000:3000"
+
+version: '3'
+services:
+  react-app:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./dashboard:/app
+    ports:
+      - '3000:3000'
+    restart: on-failure
+    container_name: react-app
+    tty: true
+
+  node-app:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - '5000:5000'
+    restart: on-failure
+    container_name: node-app
+    volumes:
+      - /app/node_modules # Inside the container, don't try to override this folder, just leave as is
+      - ./api:/app # Look at the server directory and copy everything into the app folder in the container
+    tty: true
