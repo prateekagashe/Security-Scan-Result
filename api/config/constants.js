@@ -1,5 +1,5 @@
 module.exports = {
-    MONGO_URL: "mongodb+srv://prateek:year_2020@cluster0.adbk6.mongodb.net/prod?retryWrites=true&w=majority",
+    MONGO_URL: "mongodb.net/prod?retryWrites=true&w=majority",
     DATE_FORMAT: "DD-MM-YYYY",
     IST_TIMEZONE: "Asia/Kolkata",
     BAD_REQUEST_ERROR_CODE: 400,
